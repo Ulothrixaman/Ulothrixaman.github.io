@@ -2,6 +2,10 @@ html {
     font-size: 16px;
 }
 
+*::-webkit-scrollbar{
+    display: none;
+}
+
 body {
     font-family: "Roboto", Arial, Verdana, sans-serif;
     background: #e4f2fb;
@@ -27,6 +31,8 @@ a {
 .menu_show {
     width: 10rem;
     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.19), 0 6px 6px -10px rgba(0, 0, 0, 0.23);
+    display: block;
+    overflow: auto;
 }
 
 .my-playlist {
@@ -82,6 +88,7 @@ a {
     padding-left: 20px;
     cursor: pointer;
 }
+
 .song {
     padding: 10px;
     height: 40px;
@@ -92,7 +99,8 @@ a {
     cursor: pointer;
     word-break: break-all;
 }
-.song i{
+
+.song i {
     font-size: 15px;
     margin-right: 6px;
 }
@@ -195,6 +203,7 @@ a {
     height: 100%;
     border-radius: 0.25rem;
     overflow: hidden;
+    background-color: rgba(211, 3, 32, 0.85);
     border: 1px solid rgba(211, 3, 32, 0.85);
     cursor: pointer;
 }
@@ -244,7 +253,7 @@ a {
     min-width: 100%;
 }
 
-.info__song_run{
+.info__song_run {
     position: relative;
     left: 0;
 }
@@ -285,7 +294,7 @@ a {
 
 .list--buttons li:nth-of-type(2) a {
     padding-top: 0.82rem;
-    padding-right: 1rem;
+    padding-right: 1.19rem;
     padding-bottom: 0.82rem;
     padding-left: 1.19rem;
     margin-left: 0.5rem;
@@ -336,6 +345,8 @@ a {
     text-align: center;
     position: absolute;
     margin-top: 10px;
+    width: 100%;
+    left: 0;
 }
 
 .alert {

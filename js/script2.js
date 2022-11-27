@@ -5,7 +5,6 @@ let playlist_ele = menu.parentElement.children[2];
 let settings_ele = menu.parentElement.children[3];
 let semaphore = 1;
 
-
 function load_song_complete() {
     menu.children[2].children[1].children[3].children[1].innerText = playlist.length;
     songs.innerHTML = '';
@@ -81,11 +80,9 @@ function show_settings() {
         settings_ele.classList.add('my-playlist');
 }
 
-function show_option() {
-    if (options.classList.length == 1)
-        options.classList.add('menu_show');
-    else
-        options.classList.remove('menu_show');
+function show_option(number) {
+    feed_option_content(number);
+    options.classList.add('menu_show');
 }
 
 function close_option() {
@@ -142,13 +139,22 @@ function hide_error() {
     error_music.pause();
 }
 
+function error_handle() {
+    setTimeout(() => {
+        show_menu();
+        hide_error();
+    }, 200);
+}
+
 
 function song_name(song_name) {
     if (song_name.length > 25) {
+        flag = 1;
         let new_song_name = (song_name + "____" + song_name + "____" + song_name + "____" + song_name + "____" + song_name);
         return new_song_name;
     }
     else {
+        flag = 0;
         return song_name;
     }
 }
@@ -156,11 +162,11 @@ function song_name(song_name) {
 function run_song_name() {
     console.log('hello');
     body__info[1].classList.add('info__song_run')
-    let temp_count = 0, temp_w = -body__info[1].offsetWidth;
+    let temp_w = -body__info[1].offsetWidth;
     console.log(temp_w);
-   song_int =  setInterval(() => {
-        temp_count -= 10;
+    song_int = setInterval(() => {
+        temp_count -= 2;
         body__info[1].style.left = temp_count + 'px';
         if (temp_count <= temp_w) temp_count = 270;
-    }, 200);
+    }, 50);
 }

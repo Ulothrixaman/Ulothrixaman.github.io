@@ -8,6 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style2.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
 </head>
 
@@ -83,29 +84,23 @@
             <div class="menu">
                 <div class="header" style="background-color: rgb(238, 255, 0);">
                     <div class="name_com" style="color: #d10000;">Settings</div>
-                    <div class="cancel" style="color: black;" onclick="close_single_window()"><svg class="w-6 h-6" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <div class="cancel" style="color: black;" onclick="close_single_window()"><svg class="w-6 h-6"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18L18 6M6 6l12 12"></path>
                         </svg></div>
                 </div>
                 <div class="songs" style="text-align: center;">
-                    <div onclick="show_option()" class="song"><i class="fa fa-bell-o" aria-hidden="true"></i>Error Tones</div>
-                    <div onclick="show_option()" class="song"><i class="fa fa-paint-brush" aria-hidden="true"></i>App Colour</div>
+                    <div onclick="show_option(0)" class="song"><i class="fa fa-bell-o" aria-hidden="true"></i>Error
+                        Tones</div>
+                    <div onclick="show_option(1)" class="song"><i class="fa fa-paint-brush" aria-hidden="true"></i>App
+                        Colour</div>
+                    <div onclick="show_option(2)" class="song"><i class="fa fa-refresh" aria-hidden="true"></i>Reapet
+                        Status</div>
                 </div>
             </div>
             <div class="menu" style="z-index: 7;">
-                <div class="header" style="background-color: rgb(21, 255, 0);">
-                    <div class="name_com" style="color: #d10000;">Options</div>
-                    <div class="cancel" style="color: black;" onclick="close_option()"><svg class="w-6 h-6" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12"></path>
-                        </svg></div>
-                </div>
-                <div class="songs" style="text-align: center;">
-                    here we go
-                </div>
+                
             </div>
             <div class="player__body">
                 <div class="body__cover">
@@ -162,6 +157,7 @@
     </div>
     <script src="js/script.js"></script>
     <script src="js/script2.js"></script>
+    <script src="js/script3.js"></script>
 </body>
 
 </html>
