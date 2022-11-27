@@ -3,7 +3,7 @@ let body__cover = document.getElementsByClassName('body__cover')[0].children;
 body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
 body__cover[4].style.left = body__cover[2].offsetLeft + 'px';
 body__cover[4].style.width = 0;
-let abc, xx, Music, Music_index = 0, timeint = -1, music_list = [], playlist = [];
+let abc, xx, Music, Music_index = 0, timeint = -1, music_list = [], playlist = [], error_song = 6, error_music;
 let ele = document.getElementById('file');
 
 
@@ -12,19 +12,34 @@ ele.addEventListener('change', () => {
 })
 
 control_btn[1].addEventListener('click', () => {
+    if (playlist.length == 0) {
+        show_error('list is empty <span onclick="setTimeout(() => { show_menu(); }, 200);" style="color: blue; cursor: pointer; ">click me</span> and Load songs');
+        return;
+    }
     if (Music.paused) {
         play_music();
     }
     else pause_music();
 })
 
+
 body__cover[2].addEventListener('click', (e) => {
+    if (playlist.length == 0) {
+        show_error('list is empty <span onclick="setTimeout(() => { show_menu(); }, 200);" style="color: blue;cursor: pointer;">click me</span> and Load songs');
+        return;
+    }
     seek_music(e.clientX);
 })
 
+
 body__cover[4].addEventListener('click', (e) => {
+    if (playlist.length == 0) {
+        show_error('list is empty <span onclick="setTimeout(() => { show_menu(); }, 200);" style="color: blue;cursor: pointer;">click me</span> and Load songs');
+        return;
+    }
     seek_music(e.clientX);
 })
+
 
 
 function load_song() {
@@ -33,15 +48,22 @@ function load_song() {
         playlist[i] = music_list[i];
         console.log(music_list[i]);
     }
-    Music = new Audio(music_list[Music_index].name);
+    Music = new Audio('/songs/' + music_list[Music_index].name);
+    document.getElementsByClassName('info__song')[0].innerHTML = `${music_list[Music_index].name}`;
     load_song_complete();
 }
 
+
 function play_music() {
+    if (playlist.length == 0) {
+        show_error('list is empty <span onclick="setTimeout(() => { show_menu(); }, 200);" style="color: blue;cursor: pointer;">click me</span> and Load songs');
+        return;
+    }
     load_song_complete();
-    document.getElementById(Music_index).style.color='red';
+    document.getElementById(Music_index).style.color = 'red';
+    document.getElementsByClassName('info__song')[0].innerHTML = `${music_list[Music_index].name}`;
     if (Music.currentTime >= Music.duration) {
-        Music = new Audio(music_list[Music_index].name);
+        Music = new Audio('/songs/' + music_list[Music_index].name);
         body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
         body__cover[4].style.width = 0;
     }
@@ -70,6 +92,10 @@ function pause_music() {
 
 
 function next_music() {
+    if (playlist.length == 0) {
+        show_error('list is empty <span onclick="setTimeout(() => { show_menu(); }, 200);" style="color: blue;cursor: pointer;">click me</span> and Load songs');
+        return;
+    }
     Music.pause();
     body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
     body__cover[4].style.width = 0;
@@ -77,7 +103,7 @@ function next_music() {
         clearInterval(timeint);
     timeint = -1;
     Music_index++;
-    Music = new Audio(music_list[Music_index].name);
+    Music = new Audio('/songs/' + music_list[Music_index].name);
     setTimeout(() => {
         play_music();
     }, 100);
@@ -85,6 +111,10 @@ function next_music() {
 
 
 function previous_music() {
+    if (playlist.length == 0) {
+        show_error('list is empty <span onclick="setTimeout(() => { show_menu(); }, 200);" style="color: blue;cursor: pointer;">click me</span> and Load songs');
+        return;
+    }
     Music.pause();
     body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
     body__cover[4].style.width = 0;
@@ -92,7 +122,7 @@ function previous_music() {
         clearInterval(timeint);
     timeint = -1;
     Music_index--;
-    Music = new Audio(music_list[Music_index].name);
+    Music = new Audio('/songs/' + music_list[Music_index].name);
     setTimeout(() => {
         play_music();
     }, 100);
@@ -116,11 +146,12 @@ function play_musicNum(x) {
         clearInterval(timeint);
     timeint = -1;
     Music_index = x;
-    Music = new Audio(music_list[Music_index].name);
+    Music = new Audio('/songs/' + music_list[Music_index].name);
     setTimeout(() => {
         play_music();
     }, 100);
 }
+
 
 function replay() {
     Music.currentTime = 0;

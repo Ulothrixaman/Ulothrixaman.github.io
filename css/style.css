@@ -34,6 +34,8 @@ a {
     margin-left: 10rem;
     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.19), 0 6px 6px -10px rgba(0, 0, 0, 0.23);
     z-index: 6;
+    display: block;
+    overflow: auto;
 }
 
 .header {
@@ -46,6 +48,8 @@ a {
     justify-content: space-between;
     padding: 0px 10px 0px 10px;
     cursor: pointer;
+    position: sticky;
+    top: 0;
 }
 
 .header .cancel svg {
@@ -78,7 +82,6 @@ a {
     padding-left: 20px;
     cursor: pointer;
 }
-
 .song {
     padding: 10px;
     height: 40px;
@@ -88,6 +91,10 @@ a {
     padding-left: 20px;
     cursor: pointer;
     word-break: break-all;
+}
+.song i{
+    font-size: 15px;
+    margin-right: 6px;
 }
 
 .playlist ul li label {
@@ -320,7 +327,6 @@ a {
 .demo-preview {
     text-align: center;
     position: absolute;
-    z-index: 6;
     margin-top: 10px;
 }
 
@@ -352,16 +358,13 @@ a {
 
 .alert.alert-dismissable .close,
 .alert.alert-dismissible .close {
-    top: -2px;
-    right: -20px;
-    color: inherit;
-    top: -25px;
-    right: -63px;
+    top: -12px;
+    right: -70%;
     color: inherit;
     background: transparent;
     outline: none;
     border: none;
-    font-size: 23px;
+    font-size: 28px;
     color: black;
 }
 
