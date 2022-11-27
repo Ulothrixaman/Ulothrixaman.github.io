@@ -221,6 +221,7 @@ a {
     padding-top: 1.5rem;
     padding-bottom: 1.25rem;
     text-align: center;
+    overflow: hidden;
 }
 
 .info__album,
@@ -239,6 +240,13 @@ a {
     font-size: 1.15rem;
     font-weight: 400;
     color: #d30320;
+    width: max-content;
+    min-width: 100%;
+}
+
+.info__song_run{
+    position: relative;
+    left: 0;
 }
 
 .body__buttons {

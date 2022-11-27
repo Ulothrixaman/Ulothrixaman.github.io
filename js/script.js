@@ -1,9 +1,11 @@
 let control_btn = document.getElementsByClassName('list--buttons')[0].children;
 let body__cover = document.getElementsByClassName('body__cover')[0].children;
+let body__info = document.getElementsByClassName('body__info')[0].children;
 body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
 body__cover[4].style.left = body__cover[2].offsetLeft + 'px';
 body__cover[4].style.width = 0;
-let abc, xx, Music, Music_index = 0, timeint = -1, music_list = [], playlist = [], error_song = 6, error_music;
+body__info[1].style.left= 0;
+let abc, xx, Music, Music_index = 0, timeint = -1,song_int=-1, music_list = [], playlist = [], error_song = 6, error_music;
 let ele = document.getElementById('file');
 
 
@@ -49,7 +51,8 @@ function load_song() {
         console.log(music_list[i]);
     }
     Music = new Audio('/songs/' + music_list[Music_index].name);
-    document.getElementsByClassName('info__song')[0].innerHTML = `${music_list[Music_index].name}`;
+    let new_song_name = song_name(music_list[Music_index].name);
+    document.getElementsByClassName('info__song')[0].innerHTML = `${new_song_name}`;
     load_song_complete();
 }
 
@@ -61,7 +64,9 @@ function play_music() {
     }
     load_song_complete();
     document.getElementById(Music_index).style.color = 'red';
-    document.getElementsByClassName('info__song')[0].innerHTML = `${music_list[Music_index].name}`;
+    let new_song_name = song_name(music_list[Music_index].name);
+    document.getElementsByClassName('info__song')[0].innerHTML = `${new_song_name}`;
+    run_song_name();
     if (Music.currentTime >= Music.duration) {
         Music = new Audio('/songs/' + music_list[Music_index].name);
         body__cover[3].style.left = body__cover[2].offsetLeft + 'px';

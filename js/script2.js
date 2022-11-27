@@ -82,10 +82,13 @@ function show_settings() {
 }
 
 function show_option() {
-    options.classList.add('menu_show');
+    if (options.classList.length == 1)
+        options.classList.add('menu_show');
+    else
+        options.classList.remove('menu_show');
 }
 
-function close_option(){
+function close_option() {
     console.log('hello');
     if (options.classList.length > 1) {
         options.classList.remove('menu_show');
@@ -139,3 +142,25 @@ function hide_error() {
     error_music.pause();
 }
 
+
+function song_name(song_name) {
+    if (song_name.length > 25) {
+        let new_song_name = (song_name + "____" + song_name + "____" + song_name + "____" + song_name + "____" + song_name);
+        return new_song_name;
+    }
+    else {
+        return song_name;
+    }
+}
+
+function run_song_name() {
+    console.log('hello');
+    body__info[1].classList.add('info__song_run')
+    let temp_count = 0, temp_w = -body__info[1].offsetWidth;
+    console.log(temp_w);
+   song_int =  setInterval(() => {
+        temp_count -= 10;
+        body__info[1].style.left = temp_count + 'px';
+        if (temp_count <= temp_w) temp_count = 270;
+    }, 200);
+}
