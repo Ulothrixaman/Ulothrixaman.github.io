@@ -7,6 +7,12 @@ body__cover[4].style.width = 0;
 body__info[1].style.left = 0;
 let abc, xx, Music, Music_index = 0, timeint = -1, song_int = -1, music_list = [], playlist = [], error_song = 6, error_music, flag = 0, temp_count = 0, repeat_status = 0;
 let ele = document.getElementById('file');
+let menu = document.getElementsByClassName('menu')[0];
+let options = document.getElementsByClassName('menu')[3];
+let songs = document.getElementsByClassName('songs')[0];
+let playlist_ele = menu.parentElement.children[2];
+let settings_ele = menu.parentElement.children[3];
+let semaphore = 1;
 
 
 ele.addEventListener('change', () => {
@@ -53,9 +59,24 @@ function load_song() {
     Music = new Audio('/songs/' + music_list[Music_index].name);
     let new_song_name = song_name(music_list[Music_index].name);
     document.getElementsByClassName('info__song')[0].innerHTML = `${new_song_name}`;
+    menu.children[2].children[1].children[3].children[1].innerText = playlist.length;
     load_song_complete();
 }
 
+
+function load_song_complete() {
+    let new_song_name = song_name(music_list[Music_index].name);
+    document.getElementsByClassName('info__song')[0].innerHTML = `${new_song_name}`;
+    songs.innerHTML = '';
+    for (let ii = 0; ii < music_list.length; ii++) {
+        songs.innerHTML += `<div class="song" id="${ii}">${music_list[ii].name}</div>`
+    }
+    Array.from(songs.children).forEach(song_key => {
+        song_key.addEventListener('click', () => {
+            play_musicNum(parseInt(song_key.getAttribute('id')));
+        })
+    })
+}
 
 function play_music() {
     if (playlist.length == 0) {

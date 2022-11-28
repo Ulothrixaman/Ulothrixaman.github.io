@@ -2,11 +2,16 @@ html {
     font-size: 16px;
 }
 
-*::-webkit-scrollbar{
+*::-webkit-scrollbar {
     display: none;
 }
 
 body {
+    /* font-family: 'Anek Devanagari', sans-serif;
+    font-family: 'BhuTuka Expanded One', cursive;
+    font-family: 'Lato', sans-serif;
+    font-family: 'Nerko One', cursive;
+    font-family: 'Rubik Microbe', cursive; */
     font-family: "Roboto", Arial, Verdana, sans-serif;
     background: #e4f2fb;
 }

@@ -1,23 +1,25 @@
-let menu = document.getElementsByClassName('menu')[0];
-let options = document.getElementsByClassName('menu')[3];
-let songs = document.getElementsByClassName('songs')[0];
-let playlist_ele = menu.parentElement.children[2];
-let settings_ele = menu.parentElement.children[3];
-let semaphore = 1;
 
-function load_song_complete() {
-    menu.children[2].children[1].children[3].children[1].innerText = playlist.length;
-    songs.innerHTML = '';
-    for (let ii = 0; ii < playlist.length; ii++) {
-        songs.innerHTML += `<div class="song" id="${ii}">${playlist[ii].name}</div>`
-    }
-    Array.from(songs.children).forEach(song_key => {
-        song_key.addEventListener('click', () => {
-            play_musicNum(parseInt(song_key.getAttribute('id')));
-        })
-    })
+
+function shuffle() {
+    pause_music();
+    body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
+    body__cover[4].style.width = 0;
+    music_list = shuffleArray(music_list);
+    Music_index = 0;
+    Music = new Audio('/songs/' + music_list[Music_index].name);
+    load_song_complete();
+    show_menu(); show_playlist();
 }
 
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
 
 window.addEventListener('click', (e) => {
     if (semaphore && menu.classList.length > 1) {
