@@ -6,6 +6,11 @@ html {
     display: none;
 }
 
+*{
+    margin: 0;
+    padding: 0;
+}
+
 body {
     /* font-family: 'Anek Devanagari', sans-serif;
     font-family: 'BhuTuka Expanded One', cursive;

@@ -5,7 +5,7 @@ body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
 body__cover[4].style.left = body__cover[2].offsetLeft + 'px';
 body__cover[4].style.width = 0;
 body__info[1].style.left = 0;
-let abc, xx, Music, Music_index = 0, timeint = -1, song_int = -1, music_list = [], playlist = [], error_song = 6, error_music, flag = 0, temp_count = 0, repeat_status = 0;
+let abc, xx, Music, Music_index = 0, timeint = -1, song_int = -1, music_list = [], playlist = [], error_song = 6, error_music, flag = 0, temp_count = 0, repeat_status = 0,song_map =[];
 let ele = document.getElementById('file');
 let menu = document.getElementsByClassName('menu')[0];
 let options = document.getElementsByClassName('menu')[3];
@@ -52,24 +52,40 @@ body__cover[4].addEventListener('click', (e) => {
 
 function load_song() {
     for (let i = 0; i < ele.files.length; i++) {
+        const reader = new FileReader();
+        let temp_music;
+        reader.onload = function () {
+            var str = this.result;
+            music_list[i] = str;
+            // console.log(music_list[i]);
+        };
+        reader.readAsDataURL(ele.files[i]);
         music_list[i] = ele.files[i];
-        playlist[i] = music_list[i];
-        console.log(music_list[i]);
+        playlist[i] = ele.files[i].name;
+        // console.log(music_list[i]);
     }
-    Music = new Audio('/songs/' + music_list[Music_index].name);
-    let new_song_name = song_name(music_list[Music_index].name);
-    document.getElementsByClassName('info__song')[0].innerHTML = `${new_song_name}`;
-    menu.children[2].children[1].children[3].children[1].innerText = playlist.length;
-    load_song_complete();
+    map_song();
+    run_test();
+}
+
+function run_test() {
+    setTimeout(() => {
+        Music = new Audio(music_list[song_map[Music_index]]);
+        let new_song_name = song_name(playlist[song_map[Music_index]]);
+        document.getElementsByClassName('info__song')[0].innerHTML = `${new_song_name}`;
+        menu.children[2].children[1].children[3].children[1].innerText = playlist.length;
+        load_song_complete();
+    }, 2000);
 }
 
 
+
 function load_song_complete() {
-    let new_song_name = song_name(music_list[Music_index].name);
+    let new_song_name = song_name(playlist[song_map[Music_index]]);
     document.getElementsByClassName('info__song')[0].innerHTML = `${new_song_name}`;
     songs.innerHTML = '';
     for (let ii = 0; ii < music_list.length; ii++) {
-        songs.innerHTML += `<div class="song" id="${ii}">${music_list[ii].name}</div>`
+        songs.innerHTML += `<div class="song" id="${ii}">${playlist[song_map[ii]]}</div>`
     }
     Array.from(songs.children).forEach(song_key => {
         song_key.addEventListener('click', () => {
@@ -85,12 +101,12 @@ function play_music() {
     }
     load_song_complete();
     document.getElementById(Music_index).style.color = 'red';
-    let new_song_name = song_name(music_list[Music_index].name);
+    let new_song_name = song_name(playlist[song_map[Music_index]]);
     document.getElementsByClassName('info__song')[0].innerHTML = `${new_song_name}`;
     if (flag)
         run_song_name();
     if (Music.currentTime >= Music.duration) {
-        Music = new Audio('/songs/' + music_list[Music_index].name);
+        Music = new Audio(music_list[song_map[Music_index]]);
         body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
         body__cover[4].style.width = 0;
     }
@@ -133,7 +149,7 @@ function next_music() {
     timeint = -1;
     Music_index++;
     if (songs_end()) {
-        Music = new Audio('/songs/' + music_list[Music_index].name);
+        Music = new Audio(music_list[song_map[Music_index]]);
         setTimeout(() => {
             play_music();
         }, 100);
@@ -152,7 +168,7 @@ function previous_music() {
     temp_count = 0;
     timeint = -1;
     Music_index--;
-    Music = new Audio('/songs/' + music_list[Music_index].name);
+    Music = new Audio('/songs/' + playlist[Music_index]);
     setTimeout(() => {
         play_music();
     }, 100);
@@ -175,7 +191,7 @@ function play_musicNum(x) {
     body__cover[4].style.width = 0;
     timeint = -1;
     Music_index = x;
-    Music = new Audio('/songs/' + music_list[Music_index].name);
+    Music = new Audio(music_list[song_map[Music_index]]);
     setTimeout(() => {
         play_music();
     }, 100);
@@ -205,8 +221,8 @@ function songs_end() {
         show_error("Music list Ended");
         body__info[1].style.left = 0;
         body__info[1].classList.remove('info__song_run');
-        Music = new Audio('/songs/' + music_list[Music_index].name);
-        let new_song_name = song_name(music_list[Music_index].name);
+        Music = new Audio(music_list[song_map[Music_index]]);
+        let new_song_name = song_name(playlist[Music_index]);
         document.getElementsByClassName('info__song')[0].innerHTML = `${new_song_name}`;
         return 0;
     }

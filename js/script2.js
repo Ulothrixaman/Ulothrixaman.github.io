@@ -1,26 +1,3 @@
-
-
-function shuffle() {
-    pause_music();
-    body__cover[3].style.left = body__cover[2].offsetLeft + 'px';
-    body__cover[4].style.width = 0;
-    music_list = shuffleArray(music_list);
-    Music_index = 0;
-    Music = new Audio('/songs/' + music_list[Music_index].name);
-    load_song_complete();
-    show_menu(); show_playlist();
-}
-
-function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-    return array;
-}
-
 window.addEventListener('click', (e) => {
     if (semaphore && menu.classList.length > 1) {
         setTimeout(() => {
